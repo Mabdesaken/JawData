@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "561863463876",
+    "firebase_url": "https://jawdata-h10.firebaseio.com",
+    "project_id": "jawdata-h10",
+    "storage_bucket": "jawdata-h10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561863463876:android:8d01c192d77b6b73",
+        "android_client_info": {
+          "package_name": "com.jawdata.hackjunction.jawdata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561863463876-127l65pcio7q2vnc5r4qum8fp59l2k2a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jawdata.hackjunction.jawdata",
+            "certificate_hash": "c7eae0f096ed567a1c1105fc55af10a102da7611"
+          }
+        },
+        {
+          "client_id": "561863463876-pqst915sjkt6pt6rs4uf8q8jl034qjvr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCugATUsScsc49aGkIInME8GKtHv5FOsk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561863463876-pqst915sjkt6pt6rs4uf8q8jl034qjvr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
