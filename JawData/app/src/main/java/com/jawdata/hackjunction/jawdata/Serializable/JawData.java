@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class JawData {
 
+    public static final String CMP = "JAWDATA";
     private Date timestamp;
     private Integer value;
 

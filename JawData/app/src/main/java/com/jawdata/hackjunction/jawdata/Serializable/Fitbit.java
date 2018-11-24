@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Fitbit {
 
+    public static final String CMP = "FITBIT";
     @PropertyName("heart_rate")
     private int heartRate;
 
