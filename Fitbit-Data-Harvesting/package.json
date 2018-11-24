@@ -1,0 +1,27 @@
+{
+  "fitbit": {
+    "appUUID": "97672b5d-57d1-46bb-911b-25f9f1dcefd0",
+    "appType": "app",
+    "appDisplayName": "JawData",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "#8bc34a",
+    "requestedPermissions": [
+      "access_heart_rate",
+      "access_user_profile",
+      "access_activity",
+      "run_background"
+    ],
+    "buildTargets": [
+      "higgs",
+      "meson"
+    ],
+    "i18n": {
+      "en": {
+        "name": "JawData"
+      }
+    }
+  },
+  "devDependencies": {
+    "@fitbit/sdk": "~1.0.0"
+  }
+}
