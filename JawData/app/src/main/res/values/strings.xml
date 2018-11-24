@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">JawData</string>
+    <string name="title_activity_intro_view">IntroView</string>
+    <string name="intro_create_health_data">Create your Health Data Vault</string>
+    <string name="intro_ic_safe">ic_safe</string>
 </resources>

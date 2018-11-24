@@ -6,14 +6,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-public class FetchFromFirebaseListener implements ValueEventListener {
+public abstract class FetchFromFirebaseListener implements ValueEventListener {
 
     public FetchFromFirebaseListener() {}
 
     @Override
-    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-    }
+    public abstract void onDataChange(@NonNull DataSnapshot dataSnapshot);
 
     @Override
     public void onCancelled(@NonNull DatabaseError databaseError) {
