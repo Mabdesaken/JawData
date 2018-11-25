@@ -3,30 +3,34 @@ package com.jawdata.hackjunction.jawdata.Utility;
 
 
 public class ScoreUtil {
-    public static final int
-            CALM = 200,
-            AGITATED = 300,
-            IRRITATED = 400,
-            STRESSED = 500;
+    public static final double
+            CALM = 400,
+            AGITATED = 600,
+            IRRITATED = 800,
+            STRESSED = 1000;
 
 
-    public static String getPersonalizedMsg(int computedScore) {
+    public static String getPersonalizedMsg(double score) {
         String msg = "";
-        if (computedScore < CALM) {
+        if (score < CALM) {
             msg = "Hey! You're doing fine - let's help you to keep it that way!";
-        } else if (computedScore < AGITATED) {
+        } else if (score < AGITATED) {
             msg = "We can see you need some food to stay on top. Maybe try this recipe?";
-        } else if (computedScore < IRRITATED) {
+        } else if (score < IRRITATED) {
             msg = "We hope we're not bothering you - but if you'd made some food for yourself, yo'd feel better!";
-        } else if (computedScore < STRESSED) {
+        } else if (score < STRESSED) {
             // oh shit they mad
             msg = "Not meant as an inconvenience - but we hope you're OK. Consider making some food to feel better";
         }
         return msg;
     }
 
-    public static int calculateScore(int avgHeartbeat, int avgJaw, int deficit) {
-        int base = 100+deficit;
-        return (int) ((base*(avgHeartbeat)*0.32)/(1/avgJaw));
+    public static double calculateScore(int avgHR, int weight, int age, int duration, int intake, int limit) {
+        if (avgHR == 0) return 0;
+
+        double calculatedConsumption = ((-55.0969 + (0.6309 * avgHR) + (0.1988 * weight) + (0.2017 * age)) / 4.184) * 60 * (duration/1000);
+
+
+        return (limit + calculatedConsumption) - intake;
     }
 }

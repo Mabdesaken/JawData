@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.jawdata.hackjunction.jawdata.Serializable.Fitbit;
 import com.jawdata.hackjunction.jawdata.Serializable.JawData;
-import com.jawdata.hackjunction.jawdata.Utility.FirebaseUtil;
 import com.jawdata.hackjunction.jawdata.Utility.Response;
 
 import java.util.List;
@@ -44,7 +42,7 @@ public class OverviewActivity extends AppCompatActivity implements Response {
     private void updateFitbitData(List<Fitbit> result){
         int res = 0;
         for (Fitbit fit : result){
-            res += fit.getHeartRate();
+            res += fit.getHeart_rate();
         }
         avgHeartbeats = res/result.size();
     }

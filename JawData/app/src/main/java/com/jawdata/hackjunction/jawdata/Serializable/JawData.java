@@ -13,7 +13,11 @@ public class JawData implements Serialize {
     private Date timestamp;
     private Integer value;
 
-    public static SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd HH:mmm:ss");
+    public static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    public JawData() {
+        // serialize yo...
+    }
 
     public JawData(Date timestamp, Integer value) {
         this.timestamp = timestamp;
@@ -38,10 +42,10 @@ public class JawData implements Serialize {
 
     @Override
     public <T> int calculateAverage(List<T> list) {
-        List<JawData> newList = (List<JawData>)list;
+        if (list == null) return 0;
         Integer sum = 0;
         if(!list.isEmpty()) {
-            for (JawData jaw : newList) {
+            for (JawData jaw : (List<JawData>)list) {
                 sum += jaw.value;
             }
             return sum / list.size();
