@@ -5,6 +5,14 @@
     <string name="intro_ic_safe">ic_safe</string>
     <string name="Startup_word">Hello World!</string>
     <string name="intro_store_health_info">Store all your personal health informations</string>
+    <string name="Intro_next">Next</string>
+    <string name="intro_finish">Finish</string>
+    <string name="overview_manage">MANAGE</string>
+    <string name="avg_heartbeats">avg_heartbeats</string>
+    <string name="have_full_control_data">Have Full Control of Your Data</string>
+    <string name="information_share_notice">Customize what information you share with others</string>
+    <string name="intro_diet">Diet Tracking and Google Assistant</string>
+    <string name="intro_fitness_tracking">Recommendations based on your activity</string>
     <string name="Intro_got_it">Got it!</string>
     <string name="overview_manager">MANAGE</string>
     <string name="avg_heartbeats">avg_heartbeats</string>
