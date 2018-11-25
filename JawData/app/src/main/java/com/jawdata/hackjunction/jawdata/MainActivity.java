@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.jawdata.hackjunction.jawdata.Fragments.FirstIntroScreenFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onGotItClick(View view) {
-        Intent intent = new Intent(this, OverviewActivity.class);
+        Intent intent = new Intent(this, FirstIntroScreenFragment.class);
         startActivity(intent);
     }
 }
