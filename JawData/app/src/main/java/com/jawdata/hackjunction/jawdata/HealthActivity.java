@@ -1,9 +1,12 @@
 package com.jawdata.hackjunction.jawdata;
 
 import android.app.Notification;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.Chart;
@@ -43,6 +46,17 @@ public class HealthActivity extends AppCompatActivity implements Response {
         mNotifUtil = new NotificationUtility(this);
         util = new FirebaseUtil(this);
         TextView userName = findViewById(R.id.user_name);
+
+        Window window = this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.themeGreen));
 
         Chart chart = findViewById(R.id.chart);
         chart.setDescription(null);    // Hide the description
