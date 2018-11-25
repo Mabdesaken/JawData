@@ -5,8 +5,9 @@ import com.google.firebase.database.PropertyName;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
-public class JawData {
+public class JawData implements Serialize {
 
     public static final String CMP = "JAWDATA";
     private Date timestamp;
@@ -33,5 +34,18 @@ public class JawData {
 
     public void setValue(Integer value) {
         this.value = value;
+    }
+
+    @Override
+    public <T> int calculateAverage(List<T> list) {
+        List<JawData> newList = (List<JawData>)list;
+        Integer sum = 0;
+        if(!list.isEmpty()) {
+            for (JawData jaw : newList) {
+                sum += jaw.value;
+            }
+            return sum / list.size();
+        }
+        return sum;
     }
 }

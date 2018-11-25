@@ -43,7 +43,7 @@ public class FirebaseUtil {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     values.add(snapshot.getValue(Fitbit.class));
                 }
-                delegate.getResponse(values);
+                delegate.getResponse(Fitbit.CMP,values);
             }
         });
     }
@@ -67,7 +67,7 @@ public class FirebaseUtil {
                     }
 
                 }
-                delegate.getResponse(jawDataList);
+                delegate.getResponse(JawData.CMP,jawDataList);
             }
         });
     }
@@ -80,7 +80,7 @@ public class FirebaseUtil {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Recipe recipe = dataSnapshot.getValue(Recipe.class);
-                delegate.getResponse(recipe);
+                delegate.getResponse(Recipe.CMP,recipe);
             }
         });
     }

@@ -2,11 +2,14 @@ package com.jawdata.hackjunction.jawdata.Serializable;
 
 import com.google.firebase.database.PropertyName;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Objects;
 
-public class Fitbit {
+public class Fitbit implements Serialize {
 
     public static final String CMP = "FITBIT";
+
     @PropertyName("heart_rate")
     private int heartRate;
 
@@ -59,5 +62,18 @@ public class Fitbit {
                 "heartRate=" + heartRate +
                 ", timestamp=" + timestamp +
                 '}';
+    }
+
+    @Override
+    public <T> int calculateAverage(List<T> list) {
+        List<Fitbit> newList = (List<Fitbit>)list;
+        Integer sum = 0;
+        if(!list.isEmpty()) {
+            for (Fitbit bit : newList) {
+                sum += bit.heartRate;
+            }
+            return sum / list.size();
+        }
+        return sum;
     }
 }
