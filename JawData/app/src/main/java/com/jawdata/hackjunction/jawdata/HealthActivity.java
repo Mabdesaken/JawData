@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextDirectionHeuristic;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -145,8 +146,18 @@ public class HealthActivity extends AppCompatActivity implements Response {
         } else if (cmpmsg.equals(Recipe.CMP)){
             recipe = (Recipe) result;
             notifyOnRecipe();
+            updateRecipeUI();
         }
 
+    }
+
+    private void updateRecipeUI() {
+        if (recipe == null) return;
+        TextView recipeHeader = (TextView) findViewById(R.id.recipe_header);
+        recipeHeader.setText(recipe.getTitle());
+        TextView caloriesValue = (TextView) findViewById(R.id.calories_value);
+        if (recipe.getCalories() == 0) return;
+        caloriesValue.setText(String.valueOf(recipe.getCalories()));
     }
 
     public void invalidateAndNotify(View view) {
@@ -160,7 +171,7 @@ public class HealthActivity extends AppCompatActivity implements Response {
     public void notifyOnRecipe(){
         if (recipe != null) {
             Notification.Builder nb = mNotifUtil.
-                    getAndroidChannelNotification("What about trying " + recipe.getTitle() + " tonight?",  ScoreUtil.getPersonalizedMsg(score));
+                    getAndroidChannelNotification("Try " + recipe.getTitle() + " tonight?",  ScoreUtil.getPersonalizedMsg(score));
 
             mNotifUtil.getManager().notify(101, nb.build());
         }

@@ -10,9 +10,11 @@ import com.jawdata.hackjunction.jawdata.Serializable.Fitbit;
 import com.jawdata.hackjunction.jawdata.Serializable.JawData;
 import com.jawdata.hackjunction.jawdata.Serializable.Recipe;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -75,17 +77,38 @@ public class FirebaseUtil {
 
     public void fetchRelevantRecipe(double calories) {
         DatabaseReference reference = database.getReference("Recipes");
-        Query query = reference.orderByChild("calories").startAt((int)calories).limitToFirst(1);
+        final double recommended = getRecommendedIntake(calories);
+        Query query = reference.limitToFirst(100);
         query.addListenerForSingleValueEvent(new FetchFromFirebaseListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Recipe closest = null;
+                int observedMin = Integer.MAX_VALUE;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Recipe recipe = snapshot.getValue(Recipe.class);
-                    delegate.getResponse(Recipe.CMP,recipe);
+                    if ((recommended-recipe.getCalories()) < observedMin) {
+                        closest = recipe;
+                        observedMin = (int) (recommended-recipe.getCalories());
+                    }
                 }
+                delegate.getResponse(Recipe.CMP,closest);
             }
         });
+    }
+
+    private double getRecommendedIntake(double calories) {
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("HH");
+        int formattedDate=Integer.parseInt(dateFormat.format(date));
+        double actualScore = calories;
+        if (formattedDate < 12) {
+            actualScore = actualScore/4;
+        } else if (formattedDate < 18) {
+            actualScore = actualScore/2;
+        }
+        return actualScore;
     }
 
     /*public void AddUser(final String username, final String passw) throws NoSuchAlgorithmException {
