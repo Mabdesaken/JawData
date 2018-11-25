@@ -32,55 +32,58 @@ public class FirebaseUtil {
         reference.setValue(format.format(date),value);
     }
 
-    public void fetchFitbitData() {
-        DatabaseReference reference = database.getReference("user_fitbit_data");
-        Query query = reference.orderByKey().limitToLast(3);
+    public void fetchLatestFitbitData(int amount) {
+        DatabaseReference reference = database.getReference("Fitbit");
+        Query query = reference.orderByKey().limitToLast(amount);
         query.addListenerForSingleValueEvent(new FetchFromFirebaseListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<Fitbit> values = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    values.add(snapshot.getValue(Fitbit.class));
+                        values.add(snapshot.getValue(Fitbit.class));
                 }
-                delegate.getResponse(values);
+                delegate.getResponse(Fitbit.CMP,values);
             }
         });
     }
 
     /* FETCH JAW SENSOR DATA */
-    public void fetchThreeLatestSensorData() {
+    public void fetchLatestSensorData(int amount) {
         DatabaseReference reference = database.getReference("sensorlogs3");
-        Query query = reference.orderByKey().limitToLast(3);
+        Query query = reference.orderByKey().limitToLast(amount);
         query.addListenerForSingleValueEvent(new FetchFromFirebaseListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<JawData> jawDataList = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                    try {
-                        JawData jawData;
-                        jawData = new JawData(JawData.df.parse(snapshot.getKey()), (Integer)snapshot.getValue());
-                        jawDataList.add(jawData);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                    for (DataSnapshot child : snapshot.getChildren()) {
+                        try {
+                            JawData jawData;
+                            jawData = new JawData(JawData.df.parse(child.getKey()), ((Long)child.getValue()).intValue());
+                            jawDataList.add(jawData);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                 }
-                delegate.getResponse(jawDataList);
+                delegate.getResponse(JawData.CMP,jawDataList);
             }
         });
     }
 
-    public void fetchRelevantRecipe(Integer calories) {
+    public void fetchRelevantRecipe(double calories) {
         DatabaseReference reference = database.getReference("Recipes");
-        Query query = reference.orderByChild("calories").orderByValue().startAt(calories).limitToFirst(1);
+        Query query = reference.orderByChild("calories").startAt((int)calories).limitToFirst(1);
         query.addListenerForSingleValueEvent(new FetchFromFirebaseListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Recipe recipe = dataSnapshot.getValue(Recipe.class);
-                delegate.getResponse(recipe);
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Recipe recipe = snapshot.getValue(Recipe.class);
+                    delegate.getResponse(Recipe.CMP,recipe);
+                }
             }
         });
     }

@@ -1,17 +1,17 @@
 package com.jawdata.hackjunction.jawdata;
 
+import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.jawdata.hackjunction.jawdata.Serializable.Fitbit;
 import com.jawdata.hackjunction.jawdata.Serializable.JawData;
-import com.jawdata.hackjunction.jawdata.Serializable.Recipe;
-import com.jawdata.hackjunction.jawdata.Utility.FirebaseUtil;
 import com.jawdata.hackjunction.jawdata.Utility.Response;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OverviewActivity extends AppCompatActivity implements Response {
@@ -23,16 +23,16 @@ public class OverviewActivity extends AppCompatActivity implements Response {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
-        FirebaseUtil util = new FirebaseUtil(this);
-        TextView userName = findViewById(R.id.user_name);
+        Window window = this.getWindow();
 
-        if (savedInstanceState != null && savedInstanceState.containsKey(getString(R.string.avg_heartbeats))) {
-            avgHeartbeats = savedInstanceState.getInt(getString(R.string.avg_heartbeats));
-        } else if (getIntent().getStringExtra(getString(R.string.avg_heartbeats)) != null) {
-            avgHeartbeats = Integer.valueOf(getIntent().getStringExtra(getString(R.string.avg_heartbeats)));
-        }
-        util.fetchThreeLatestSensorData();
-        util.fetchFitbitData();
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.themeBlue));
     }
 
     private void updateUI() {
@@ -42,7 +42,7 @@ public class OverviewActivity extends AppCompatActivity implements Response {
     private void updateFitbitData(List<Fitbit> result){
         int res = 0;
         for (Fitbit fit : result){
-            res += fit.getHeartRate();
+            res += fit.getHeart_rate();
         }
         avgHeartbeats = res/result.size();
     }
@@ -67,5 +67,12 @@ public class OverviewActivity extends AppCompatActivity implements Response {
     }
 
     public void onManage(View view) {
+        Intent intent = new Intent(this, ManageActivity.class);
+        startActivity(intent);
+    }
+
+    public void onHealth(View view) {
+        Intent intent = new Intent(this, HealthActivity.class);
+        startActivity(intent);
     }
 }

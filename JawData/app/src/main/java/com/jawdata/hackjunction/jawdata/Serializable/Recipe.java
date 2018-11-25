@@ -3,11 +3,13 @@ package com.jawdata.hackjunction.jawdata.Serializable;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
+import java.util.List;
 import java.util.Objects;
 
 @IgnoreExtraProperties
-public class Recipe {
+public class Recipe implements Serialize {
 
+    public static final String CMP = "RECIPE";
     @PropertyName("calories")
     private int calories;
 
@@ -75,5 +77,10 @@ public class Recipe {
                 ", protein=" + protein +
                 ", title='" + title + '\'' +
                 '}';
+    }
+
+    @Override
+    public <T> int calculateAverage(List<T> list) {
+        return 0;
     }
 }

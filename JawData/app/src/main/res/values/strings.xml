@@ -13,4 +13,9 @@
     <string name="information_share_notice">Customize what information you share with others</string>
     <string name="intro_diet">Diet Tracking and Google Assistant</string>
     <string name="intro_fitness_tracking">Recommendations based on your activity</string>
+    <string name="Intro_got_it">Got it!</string>
+    <string name="overview_manager">MANAGE</string>
+    <string name="avg_heartbeats">avg_heartbeats</string>
+    <string name="mathias_abdesaken">Mathias Abdesaken</string>
+    <string name="check">CHECK</string>
 </resources>
